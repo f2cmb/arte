@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 	$targ_w = $targ_h = 150;
 	$jpeg_quality = 90;
 
-	$src = 'demo_files/pool.jpg';
+	$src = 'demo_files/sago.jpg';
 	$img_r = imagecreatefromjpeg($src);
 	$dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
 
@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $('#target').Jcrop({
       onChange: updatePreview,
       onSelect: updatePreview,
-      aspectRatio: xsize / ysize
     },function(){
       // Use the API to get the real image size
       var bounds = this.getBounds();
@@ -149,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       <img src="demo_files/sago.jpg" class="jcrop-preview" alt="Preview" />
     </div>
   </div>
-<form action="crop.php" method="post" onsubmit="return checkCoords();">
+<form action="tutorial3.php" method="post" onsubmit="return checkCoords();">
 	<input type="hidden" id="x" name="x" />
 	<input type="hidden" id="y" name="y" />
 	<input type="hidden" id="w" name="w" />
