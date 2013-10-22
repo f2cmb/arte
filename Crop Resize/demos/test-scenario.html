@@ -3,112 +3,96 @@
 <head>
   <title></title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
-<script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.4.3.min.js"></script>
-<script type="text/javascript" src="js/jquery.imgareaselect.js"></script>
-<script type="text/javascript" src="js/html2canvas.js"></script>
-
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+  <script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.4.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>
+  <script type="text/javascript" src="js/html2canvas.js"></script>
 <script type="text/javascript">
 
+function preview(img, selection) {
+    var scaleX = 400 / (selection.width || 1);
+    var scaleY = 400 / (selection.height || 1);
 
-  window.onload = function(){
-      var stage = new Kinetic.Stage({
-          container : "container",
-          width : 500,
-          height : 500
-      });
-      var layer = new Kinetic.Layer();
-      stage.add(layer);
-      var con = stage.getContainer();    
-      var dragSrcEl = null;
-      //image
-      document.getElementById("yoda").addEventListener('dragstart',function(e){
-             dragSrcEl = this;
-      });
-      document.getElementById("darkvador").addEventListener('dragstart',function(e){
-             dragSrcEl = this;
-      });
+    $('#tatooine + div > img').css({
+        width: Math.round(scaleX * 400) + 'px',
+        height: Math.round(scaleY * 400) + 'px',
+        marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+        marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+    });
+}
 
-      con.addEventListener('dragover',function(e){
-          e.preventDefault(); //@important
-      });
-      //insert image to stage
-      con.addEventListener('drop',function(e){
-          var image = new Kinetic.Image({
-             draggable : true
-          });
-          layer.add(image);
-          imageObj = new Image();
-          imageObj.src = dragSrcEl.src;
-          imageObj.onload = function(){
-              image.setImage(imageObj)
-              layer.draw()
-          };
-       });
+$(document).ready(function () {
+    $('<div id="container"><img src="images/tatooine.jpg" style="position: relative" /><div>')
+        .css({
+            float: 'left',
+            position: 'relative',
+            overflow: 'hidden',
+            width: '400px',
+            height: '400px'
+        })
+        .insertAfter($('#tatooine'));
 
-
-  }
- 
+    $('#tatooine').imgAreaSelect({ aspectRatio: '1:1', onSelectChange: preview });
+});
   
   
-  function preview(img, selection) {
-      var scaleX = 400 / (selection.width || 1);
-      var scaleY = 400 / (selection.height || 1);
   
-      $('#container + div > img').css({
-          width: Math.round(scaleX * 400) + 'px',
-          height: Math.round(scaleY * 400) + 'px',
-          marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
-          marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
-      });
-  }
 
-  $(document).ready(function () {
-      $('<div><img src="images/tatooine.jpg" style="position: relative;" /><div>')
-          .css({
-              position: 'relative',
-              float: 'left',
-              overflow: 'hidden',
-              width: '400px',
-              height: '400px'
-          })
-          .insertAfter($('#container'));
+window.onload = function(){
+    var stage = new Kinetic.Stage({
+        container : "container",
+        width : 400,
+        height : 400
+    });
+    var layer = new Kinetic.Layer();
+    stage.add(layer);
+    var con = stage.getContainer();    
+    var dragSrcEl = null;
+    //image
+    document.getElementById("yoda").addEventListener('dragstart',function(e){
+           dragSrcEl = this;
+    });
+    document.getElementById("darkvador").addEventListener('dragstart',function(e){
+           dragSrcEl = this;
+    });
 
-      $('#container').imgAreaSelect({ aspectRatio: '1:1', onSelectChange: preview });
-  });
+    con.addEventListener('dragover',function(e){
+        e.preventDefault(); //@important
+    });
+    //insert image to stage
+    con.addEventListener('drop',function(e){
+        var image = new Kinetic.Image({
+           draggable : true
+        });
+        layer.add(image);
+        imageObj = new Image();
+        imageObj.src = dragSrcEl.src;
+        imageObj.onload = function(){
+            image.setImage(imageObj)
+            layer.draw()
+        };
+     });
+
+
+}
   
   
 </script>
-<link rel="stylesheet" href="demo_files/main.css" type="text/css" />
-<link rel="stylesheet" href="demo_files/demos.css" type="text/css" />
+  
 <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
-
 <style type="text/css">
 
-#container { width:500px;height:500px; }
+#tatooine { width:500px;height:500px; }
+.kineticjs-content{
+	margin-top:-400px;
+}
 
 </style>
-
 </head>
 <body>
-
-<div class="container">
-<div class="span12">
-<div class="jc-demo-box">
-
-	<img id="yoda" src="images/yoda.png"></img>
-	<img id="darkvador" src="images/darkvador.png"></img>
-	<div id="container" style="border-style:solid;border-width:5px;background-image:url(images/tatooine.jpg)"></div>
- 
-
-
-
-
-</div>
-</div>
-</div>
-
+<div id="tatooine"><img src="images/tatooine.jpg" style="float: left; margin-right: 10px;"></div>
+<img id="yoda" src="images/yoda.png"></img>
+<img id="darkvador" src="images/darkvador.png"></img>
 </body>
 </html>
 
