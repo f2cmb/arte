@@ -28,7 +28,9 @@ $(document).ready(function () {
             position: 'relative',
             overflow: 'hidden',
             width: '400px',
-            height: '400px'
+            height: '400px',
+			margin: '5px',
+			border: '2px solid #000'
         })
         .insertAfter($('#tatooine'));
 
@@ -75,8 +77,15 @@ window.onload = function(){
 
 
 }
-  
-  
+$(document).ready(function () {
+jQuery( '#snap' ).click(function() {
+	html2canvas(document.body, {
+	  onrendered: function(canvas) {
+	    document.body.appendChild(canvas);
+	  }
+	});
+});
+});  
 </script>
   
 <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
@@ -85,14 +94,27 @@ window.onload = function(){
 #tatooine { width:500px;height:500px; }
 .kineticjs-content{
 	margin-top:-400px;
+	top:0px;
 }
-
+#snap{
+	background-color:#a2a2a2;
+	width:150px;
+	height:50px;
+	color:#000;
+	position:absolute;
+	top:0px;
+	right:0px;
+}
 </style>
 </head>
 <body>
+	Sélectionner la zone de la photo à utiliser : 
 <div id="tatooine"><img src="images/tatooine.jpg" style="float: left; margin-right: 10px;"></div>
 <img id="yoda" src="images/yoda.png"></img>
 <img id="darkvador" src="images/darkvador.png"></img>
+
+<div id="snap">screen that !</div>
+
 </body>
 </html>
 
