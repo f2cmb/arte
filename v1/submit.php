@@ -1,5 +1,6 @@
 <?php ini_set("memory_limit", "200000000"); // for large images so that we do not get "Allowed memory exhausted"?>
 <?php
+$profile_arte = 3;
 // upload the file
 if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upload_form")) {
 	
@@ -78,7 +79,7 @@ if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upl
 		exit;
 	}
 	else{
-		header("Location: submit.php?upload_message=make sure the file is jpg, gif or png and that is smaller than 1MB&upload_message_type=error");
+		header("Location: erreur.html");
 		exit;
 	}
 }
@@ -103,19 +104,13 @@ if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upl
 		<?php }?>
 
 
-<form action="submit.php" method="post" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="margin-bottom:0px;">
+<form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="margin-bottom:0px;">
 <label>Image file, maximum 4MB. it can be jpg, gif,  png:</label><br />
           <input name="image_upload_box" type="file" id="image_upload_box" size="40" />
           <input type="submit" name="submit" value="Upload image" />     
-     
-     <br />
-	<br />
-
-     
-   
     
-  </p>
 <input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
+<input name="profile" type="hidden" id="profile" value="<?php echo $profile_arte; ?>" />
 
 </form>
 
