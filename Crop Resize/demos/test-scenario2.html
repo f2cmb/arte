@@ -4,7 +4,7 @@
   <title></title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
   <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
-  <script type="text/javascript" src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v4.4.3.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
   <script type="text/javascript" src="js/jquery.imgareaselect.js"></script>
   <script type="text/javascript" src="js/html2canvas.js"></script>
 <script type="text/javascript">
@@ -22,7 +22,7 @@ function preview(img, selection) {
 }
 
 $(document).ready(function () {
-    $('<div id="container"><img src="images/tatooine.jpg" style="position: relative" /><div>')
+    $('<div id="container"><img src="images/tatooine.jpg" style="position: relative" /></div>')
         .css({
             float: 'left',
             position: 'relative',
@@ -36,49 +36,10 @@ $(document).ready(function () {
 
     $('#tatooine').imgAreaSelect({ aspectRatio: '1:1', onSelectChange: preview });
 });
-  
-  
-  
 
-window.onload = function(){
-    var stage = new Kinetic.Stage({
-        container : "container",
-        width : 400,
-        height : 400
-    });
-    var layer = new Kinetic.Layer();
-    stage.add(layer);
-    var con = stage.getContainer();    
-    var dragSrcEl = null;
-    //image
-    document.getElementById("yoda").addEventListener('dragstart',function(e){
-           dragSrcEl = this;
-    });
-    document.getElementById("darkvador").addEventListener('dragstart',function(e){
-           dragSrcEl = this;
-    });
-
-    con.addEventListener('dragover',function(e){
-        e.preventDefault(); //@important
-    });
-    //insert image to stage
-    con.addEventListener('drop',function(e){
-        var image = new Kinetic.Image({
-           draggable : true
-        });
-        layer.add(image);
-        imageObj = new Image();
-        imageObj.src = dragSrcEl.src;
-        imageObj.onload = function(){
-            image.setImage(imageObj)
-            layer.draw()
-        };
-     });
-
-
-}
 $(document).ready(function () {
 jQuery( '#snap' ).click(function() {
+	$('.ui-resizable-handle').css("display:none")
 	html2canvas($('#container'), {
 	  onrendered: function(canvas) {
 	    document.body.appendChild(canvas);
@@ -86,8 +47,21 @@ jQuery( '#snap' ).click(function() {
 	});
 });
 });  
+
+
+$(document).ready(function () {
+
+    $( '#yoda' ).draggable();
+    $( '#darkvador' ).draggable();
+    $( '#container' ).droppable();
+    $( ".yoda" ).resizable({ ghost: true });
+	$( ".darkvador" ).resizable();
+	
+	
+});
+
 </script>
-  
+  <link href="css/flick/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
 <style type="text/css">
 
@@ -111,8 +85,8 @@ jQuery( '#snap' ).click(function() {
 <body>
 	Sélectionner la zone de la photo à utiliser : 
 <div id="tatooine"><img src="images/tatooine.jpg" style="float: left; margin-right: 10px;"></div>
-<img id="yoda" src="images/yoda.png" />
-<img id="darkvador" src="images/darkvador.png" />
+<div id="yoda"><img class="yoda" src="images/yoda.png" /></div>
+<div id="darkvador"><img class="darkvador" src="images/darkvador.png" /></div>
 
 <div id="snap">screen that !</div>
 
