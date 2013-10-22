@@ -64,9 +64,7 @@ $(document).ready(function () {
 <div id="darkvador"><img class="darkvador" src="images/darkvador.png" /></div>
 <div id="tatooine"><img class="tatooine" src="images/tatooine.jpg" style="float: left; margin-right: 10px;"></div>
 </div>
-<div style="float:left">
 
-</div>
 <div id="snap">screen that !</div>
 
 </body>

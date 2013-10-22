@@ -3,7 +3,7 @@
 <head>
   <title></title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-  <script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
   <script type="text/javascript" src="js/html2canvas.js"></script>
 <script type="text/javascript">
@@ -21,15 +21,11 @@ jQuery( '#snap' ).click(function() {
 
 
 $(document).ready(function () {
-
     $( "#yoda" ).draggable();
     $( "#darkvador" ).draggable();
     $( ".yoda" ).resizable();
 	$( ".darkvador" ).resizable();
     $( ".tatooine" ).resizable();
-
-	
-	
 });
 
 </script>
@@ -60,13 +56,13 @@ $(document).ready(function () {
 <body>
 <div>
 	Sélectionner la zone de la photo à utiliser : 
-	<div id="yoda"><img class="yoda" src="images/yoda.png" /></div>
-<div id="darkvador"><img class="darkvador" src="images/darkvador.png" /></div>
-<div id="tatooine"><img class="tatooine" src="images/tatooine.jpg" style="float: left; margin-right: 10px;"></div>
+<div id="yoda"><img class="yoda" src="images/yoda.png" /></div>
+<div id="darkvador"><img class="darkvador" src="images/darkvador.png" /></div><br /><br />
+<?php if(isset($_REQUEST['show_image']) and $_REQUEST['show_image']!=''){?>
+<div id="tatooine"><img class="tatooine" src="image_files/<?php echo $_REQUEST['show_image'];?>" style="float: left; margin-right: 10px;"></div>
+<?php }?>
 </div>
-<div style="float:left">
 
-</div>
 <div id="snap">screen that !</div>
 
 </body>
