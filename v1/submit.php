@@ -1,6 +1,10 @@
 <?php ini_set("memory_limit", "200000000"); // for large images so that we do not get "Allowed memory exhausted"?>
 <?php
-$profile_arte = 3;
+
+session_start();
+$_SESSION['profile']= 2; 
+//now, let's register our session variables
+
 // upload the file
 if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upload_form")) {
 	
@@ -90,36 +94,19 @@ if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upl
 <head>
   <title></title>
   <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
- 
 </head>
 <body>
-	
 <h1 style="margin-bottom: 0px">Submit an image</h1>
 
-
-        <?php if(isset($_REQUEST['upload_message'])){?>
-            <div class="upload_message_<?php echo $_REQUEST['upload_message_type'];?>">
-            <?php echo htmlentities($_REQUEST['upload_message']);?>
-            </div>
-		<?php }?>
-
-
 <form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="margin-bottom:0px;">
-<label>Image file, maximum 4MB. it can be jpg, gif,  png:</label><br />
-          <input name="image_upload_box" type="file" id="image_upload_box" size="40" />
-          <input type="submit" name="submit" value="Upload image" />     
-    
-<input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
-<input name="profile" type="hidden" id="profile" value="<?php echo $profile_arte; ?>" />
-
+	<label>Image file, maximum 4MB. it can be jpg, gif, png :</label><br />
+	<input name="image_upload_box" type="file" id="image_upload_box" size="40" />
+	<input type="submit" name="submit" value="Upload image" />     
+	<input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
 </form>
 
 
 
-
-<?php if(isset($_REQUEST['show_image']) and $_REQUEST['show_image']!=''){?>
-<p><img src="image_files/<?php echo $_REQUEST['show_image'];?>" /></p>
-<?php }?>
 
 
 

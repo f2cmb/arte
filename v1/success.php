@@ -51,12 +51,18 @@ $(window).on('load',function () {
 	z-index:9999;
 }
 
-
 </style>
 <?php
 
-//$profile = $_POST['profile'];
-echo $_POST['profile'];
+session_start();
+
+
+if(!isset($_SESSION['profile'])) 
+    { 
+        echo "fu";
+    }else{
+$profile = $_SESSION['profile'];
+
 switch ($profile) {
     case 2:
         $src1="images/yoda.png";
@@ -67,7 +73,7 @@ switch ($profile) {
     	$src2="images/chewie.png";
         break;
 }
-
+}
 ?>
 </head>
 <body>
