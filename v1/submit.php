@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-$_SESSION['profile']= 2; 
+$_SESSION['profile']= 7; 
 //now, let's register our session variables
 
 // upload the file
@@ -87,26 +87,94 @@ if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upl
 		exit;
 	}
 }
+
+
+switch ($_SESSION['profile']) {
+ case 1:
+     $bg_src="graphics/bg-barnes.jpg";
+ 	$profile_src="graphics/title-barnes.png";
+     break;
+ case 2:
+		$bg_src="graphics/bg-chigurh.jpg";
+ 	$profile_src="graphics/title-chigurh.png";
+     break;
+ case 3:
+		$bg_src="graphics/bg-davis.jpg";
+ 	$profile_src="graphics/title-davis.png";
+     break;
+	case 4:
+		$bg_src="graphics/bg-fink.jpg";
+		$profile_src="graphics/title-fink.png";
+	    break;
+	case 5:
+		$bg_src="graphics/bg-gopnik.jpg";
+		$profile_src="graphics/title-gopnik.png";
+	    break;
+	case 6:
+		$bg_src="graphics/bg-mcgill.jpg";
+		$profile_src="graphics/title-mcgill.png";
+	    break;
+	case 7:
+		$bg_src="graphics/bg-lebowski.jpg";
+		$profile_src="graphics/title-lebowski.png";
+	    break;
+	case 8:
+		$bg_src="graphics/bg-gunderson.jpg";
+		$profile_src="graphics/title-gunderson.png";
+		 break;
+
+		
+}
+
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <title></title>
-  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+ <meta charset="utf-8">
+  <link href="css/general.css" rel="stylesheet">
 </head>
-<body>
-<h1 style="margin-bottom: 0px">Submit an image</h1>
-
-<form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="margin-bottom:0px;">
-	<label>Image file, maximum 4MB. it can be jpg, gif, png :</label><br />
-	<input name="image_upload_box" type="file" id="image_upload_box" size="40" />
-	<input type="submit" name="submit" value="Upload image" />     
-	<input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
-</form>
-
-
-
+<body style="background:url(<?php echo $bg_src; ?>)">
+<div id="wrapper">
+		<div id="top-first">
+			<img src="graphics/logo.png" alt="coenizr" /><br />
+			Refaites-vous le portrait en
+			<br /><br /><br />
+			<img src="<?php echo $profile_src; ?>" alt="nom" />
+			
+		
+		</div>
+		<br />
+		<span>1. Je choisis ma photo </span>
+			<br />
+		<img src="graphics/arrows.png" alt="mode de sélection" />
+		<br />
+	<div id="mode-container">
+		<div class="upload-mode-container">
+			<span style="width:250px">Depuis mon ordinateur </span>
+			<div id="infos-upload">(Fichiers image seulement, 2Mo Max.,formats : jpeg, gif ou png)</div>
+			<br />
+			<div id="classic-select">
+				<form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 4.7em;">
+					<input name="image_upload_box" type="file" id="image_upload_box" size="40" />
+					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" />     
+					<input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
+				</form>
+			</div>
+		</div>
+			
+		<div class="upload-mode-container">
+			<span style="width:250px">Parmi mes albums photos Facebook </span>
+				<br /><br />
+			<div id="fb-select">
+				
+				<img src="graphics/fb-upload.png" style="padding-top: 5.8em;" />
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
