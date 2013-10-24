@@ -87,7 +87,7 @@ if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upl
 		exit;
 	}
 }
-
+ 
 
 switch ($_SESSION['profile']) {
  case 1:
@@ -135,8 +135,9 @@ switch ($_SESSION['profile']) {
   <title></title>
  <meta charset="utf-8">
   <link href="css/general.css" rel="stylesheet">
-</head>
-<body style="background:url(<?php echo $bg_src; ?>)">
+  <link rel="stylesheet" href="css/csphotoselector.css" />
+  
+
 <div id="wrapper">
 		<div id="top-first">
 			<img src="graphics/logo.png" alt="coenizr" /><br />
@@ -153,13 +154,13 @@ switch ($_SESSION['profile']) {
 		<br />
 	<div id="mode-container">
 		<div class="upload-mode-container">
-			<span style="width:250px">Depuis mon ordinateur </span>
+			<span style="width:250px">une image depuis mon ordinateur </span>
 			<div id="infos-upload">(Fichiers image seulement, 2Mo Max.,formats : jpeg, gif ou png)</div>
 			<br />
 			<div id="classic-select">
-				<form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 4.7em;">
-					<input name="image_upload_box" type="file" id="image_upload_box" size="40" />
-					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" />     
+				<form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 5em;">
+					<input name="image_upload_box" type="file" id="image_upload_box" size="20" />
+					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" style="padding-top: 15px;"/>     
 					<input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
 				</form>
 			</div>
@@ -167,15 +168,96 @@ switch ($_SESSION['profile']) {
 			
 		<div class="upload-mode-container">
 			<span style="width:250px">Parmi mes albums photos Facebook </span>
-				<br /><br />
+			<div id="infos-upload">(Je me logge, je choisis et j'envoie)</div>
+			
+				<br />
 			<div id="fb-select">
+   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 1.5em;"/>
 				
-				<img src="graphics/fb-upload.png" style="padding-top: 5.8em;" />
+				<a href="#" class="photoSelect">
+				<img src="graphics/fb-upload.png" style="padding-top: 15px;" />
+				</a>
+				<form action="successfb.php" method="POST" enctype="multipart/form-data" name="form_fb" id="form_fb"  style="padding-top: 15px;">
+					<input type="image" src="graphics/send_btn.png" name="submit" value="Envoi" />     
+					<input name="image_fb" type="hidden" id="image_fb" value="" />
+				</form>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+<!-- Markup for Carson Shold's Photo Selector -->
+<div id="CSPhotoSelector">
+	<div class="CSPhotoSelector_dialog">
+		<a href="#" id="CSPhotoSelector_buttonClose">x</a>
+		<div class="CSPhotoSelector_form">
+			<div class="CSPhotoSelector_header">
+				<p>Choose from Photos</p>
+			</div>
+
+			<div class="CSPhotoSelector_content CSAlbumSelector_wrapper">
+				<p>Browse your albums until you find a picture you want to use</p>
+				<div class="CSPhotoSelector_searchContainer CSPhotoSelector_clearfix">
+					<div class="CSPhotoSelector_selectedCountContainer">Select an album</div>
+				</div>
+				<div class="CSPhotoSelector_photosContainer CSAlbum_container"></div>
+			</div>
+
+			<div class="CSPhotoSelector_content CSPhotoSelector_wrapper">
+				<p>Select a new photo</p>
+				<div class="CSPhotoSelector_searchContainer CSPhotoSelector_clearfix">
+					<div class="CSPhotoSelector_selectedCountContainer"><span class="CSPhotoSelector_selectedPhotoCount">0</span> / <span class="CSPhotoSelector_selectedPhotoCountMax">0</span> photos selected</div>
+					<a href="#" id="CSPhotoSelector_backToAlbums">Back to albums</a>
+				</div>
+				<div class="CSPhotoSelector_photosContainer CSPhoto_container"></div>
+			</div>
+
+			<div id="CSPhotoSelector_loader"></div>
+
+
+			<div class="CSPhotoSelector_footer CSPhotoSelector_clearfix">
+				<a href="#" id="CSPhotoSelector_pagePrev" class="CSPhotoSelector_disabled">Previous</a>
+				<a href="#" id="CSPhotoSelector_pageNext">Next</a>
+				<div class="CSPhotoSelector_pageNumberContainer">
+					Page <span id="CSPhotoSelector_pageNumber">1</span> / <span id="CSPhotoSelector_pageNumberTotal">1</span>
+				</div>
+				<a href="#" id="CSPhotoSelector_buttonOK">OK</a>
+				<a href="#" id="CSPhotoSelector_buttonCancel">Cancel</a>
 			</div>
 		</div>
 	</div>
 </div>
 
+
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="example.js"></script>
+	<script src="csphotoselector.js"></script>
+  
+</head>
+<body style="background:url(<?php echo $bg_src; ?>)">
+<div id="fb-root"></div>
+<script>
+window.fbAsyncInit = function() {
+	FB.init({ appId: '155864171290746', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
+	
+	FB.getLoginStatus(function(response) {
+		if (response.authResponse) {
+			$("#login-status").html("Logged in");
+		} else {
+			$("#login-status").html("Not logged in");
+		}
+	});
+};
+(function(d){
+	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+	if (d.getElementById(id)) {return;}
+	js = d.createElement('script'); js.id = id; js.async = true;
+	js.src = "//connect.facebook.net/en_US/all.js";
+	ref.parentNode.insertBefore(js, ref);
+}(document));
+</script>
 
 
 </body>

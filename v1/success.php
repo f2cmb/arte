@@ -11,7 +11,7 @@
 
 function capture() {
 	$('.ui-resizable-handle, .ui-resizable-se, .ui-icon, .ui-icon-gripsmall-diagonal-se').css("display","none");
-	
+	$('#element1, #element2').css("border","none");
 		html2canvas($('#target'), {
         onrendered: function (canvas) {
             //Set hidden field's value to image data (base-64 string)
@@ -44,7 +44,6 @@ $(window).on('load',function () {
   
 <style type="text/css">
 
-
 #element1{
 	position:absolute;
 	z-index:9999;
@@ -62,7 +61,12 @@ $(window).on('load',function () {
  
 }
 
-
+#element1 :hover{
+cursor: -moz-grab;cursor: -webkit-grab
+}
+#element2 :hover{
+cursor: -moz-grab;cursor: -webkit-grab
+}
 
 </style>
 <?php

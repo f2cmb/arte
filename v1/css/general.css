@@ -3,7 +3,6 @@ body {
 	width:752px;
 	text-align:center;
 	margin:auto;
-
 }
 #wrapper{
 	width:752px;
@@ -24,12 +23,14 @@ body {
 	width:100%;
 	text-align:center;
 	margin:auto;
-	
 }
 .upload-mode-container{
-	width: 360px; float: left;display:inline;text-align:center;	margin:auto;margin-left:10px;
-
-	
+	width: 360px; 
+	float: left;
+	display:inline;
+	text-align:center;	
+	margin:auto;
+	margin-left:10px;
 }
 span{
 	text-align:center;
@@ -46,9 +47,10 @@ span{
 	-moz-box-shadow:    3px 3px 0px rgba(61, 161, 143, 1);
 	box-shadow:         3px 3px 0px rgba(61, 161, 143, 1);
     width: 16em; height: 16em; 
-    -webkit-border-radius: 8em; -moz-border-radius: 8em;
+    -webkit-border-radius: 8em;
+	-moz-border-radius: 8em;
+	border-radius: 8em;
 	margin-left:55px;
-
 }
 #fb-select{
 	width:300px;
@@ -57,10 +59,10 @@ span{
 	-moz-box-shadow:    3px 3px 0px rgba(104, 122, 148, 1);
 	box-shadow:         3px 3px 0px rgba(104, 122, 148, 1);
     width: 16em; height: 16em; 
-    -webkit-border-radius: 8em; -moz-border-radius: 8em;
+    -webkit-border-radius: 8em;
+	-moz-border-radius: 8em;
+	border-radius: 8em;
 	margin-left:55px;
-	margin-top:10px;
-	
 }
 #infos-upload{
 	text-align:center;
@@ -77,8 +79,7 @@ form{
 #uploaded-image{
 	text-align:center;
 	margin:auto;
-	margin-left:175px;
+	width:65%;
 }
-.grab { cursor: -moz-grab;cursor: -webkit-grab }
-.grabbing { cursor: -moz-grabbing; cursor: -webkit-grabbing; }
+
 
