@@ -11,7 +11,9 @@
 
 function capture() {
 	$('.ui-resizable-handle, .ui-resizable-se, .ui-icon, .ui-icon-gripsmall-diagonal-se').css("display","none");
+	$('#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip,#segrip').css("display","none");
 	$('#element1, #element2').css("border","none");
+	
 		html2canvas($('#target'), {
         onrendered: function (canvas) {
             //Set hidden field's value to image data (base-64 string)
@@ -44,12 +46,15 @@ $(window).on('load',function () {
   
 <style type="text/css">
 
+
 #element1{
 	position:absolute;
 	z-index:9999;
 	top:600px;
 	left:35%;
-	border: 1px dashed #11ece9;
+	border: 1px dashed #fff;
+    overflow: hidden;
+	
     
 }
 #element2{
@@ -57,16 +62,32 @@ $(window).on('load',function () {
 	z-index:9999;
 	top:600px;
 	left:35%;
-	border: 1px dashed #11ece9;
+	border: 1px dashed #fff;
+    overflow: hidden;
+	
  
 }
 
 #element1 :hover{
 cursor: -moz-grab;cursor: -webkit-grab
+    
 }
 #element2 :hover{
-cursor: -moz-grab;cursor: -webkit-grab
+	cursor: -moz-grab;cursor: -webkit-grab
+ 
 }
+
+#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+#segrip {
+    right: -5px;
+    bottom: -5px;
+}
+
 
 </style>
 <?php
@@ -150,8 +171,19 @@ switch ($profile) {
 				<?php }?>
 				<div id="elements-container">
 					<div id="element1">
-						<img class="element1" src="<?php echo $src1; ?>" /></div>
-					<div id="element2"><img class="element2" src="<?php echo $src2; ?>" /></div>
+						<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+						<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+						<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+						<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+						<img class="element1" src="<?php echo $src1; ?>" />
+					</div>
+					<div id="element2">
+						<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+					    <div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+						<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+					    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+						<img class="element2" src="<?php echo $src2; ?>" />
+					</div>
 				</div>
 			</div>
 		
