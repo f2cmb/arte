@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-$_SESSION['profile']= 7; 
+$_SESSION['profile']= 3; 
 //now, let's register our session variables
 
 // upload the file
@@ -136,7 +136,8 @@ switch ($_SESSION['profile']) {
  <meta charset="utf-8">
   <link href="css/general.css" rel="stylesheet">
   <link rel="stylesheet" href="css/csphotoselector.css" />
-  
+</head>
+<body style="background:url(<?php echo $bg_src; ?>)">
 
 <div id="wrapper">
 		<div id="top-first">
@@ -235,8 +236,7 @@ switch ($_SESSION['profile']) {
   <script type="text/javascript" src="example.js"></script>
 	<script src="csphotoselector.js"></script>
   
-</head>
-<body style="background:url(<?php echo $bg_src; ?>)">
+
 <div id="fb-root"></div>
 <script>
 window.fbAsyncInit = function() {

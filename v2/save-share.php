@@ -2,20 +2,19 @@
 <?php
 
 session_start();
-$_SESSION['profile']= 7; 
 //now, let's register our session variables
 switch ($_SESSION['profile']) {
  case 1:
-     $bg_src="graphics/bg-barnes.jpg";
- 	$profile_src="graphics/title-barnes.png";
+    	 $bg_src="graphics/bg-barnes.jpg";
+ 		 $profile_src="graphics/title-barnes.png";
      break;
  case 2:
 		$bg_src="graphics/bg-chigurh.jpg";
- 	$profile_src="graphics/title-chigurh.png";
+ 	   	$profile_src="graphics/title-chigurh.png";
      break;
  case 3:
 		$bg_src="graphics/bg-davis.jpg";
- 	$profile_src="graphics/title-davis.png";
+ 		$profile_src="graphics/title-davis.png";
      break;
 	case 4:
 		$bg_src="graphics/bg-fink.jpg";
@@ -47,29 +46,43 @@ switch ($_SESSION['profile']) {
  <meta charset="utf-8">
   <link href="css/general.css" rel="stylesheet">
   <link rel="stylesheet" href="css/csphotoselector.css" />
-  
+</head>
+<body style="background:url(<?php echo $bg_src; ?>)">
+<div id="fb-root"></div>
 
 <div id="wrapper">
 		<div id="top-first">
-			<img src="graphics/logo.png" alt="coenizr" /><br />
-			
-			<br /><br /><br />
+			<img src="graphics/logo-small.png" alt="coenizr" /><br />
+		
 			<img src="<?php echo $profile_src; ?>" alt="nom" />
 			
 		
 		</div>
-	<br /><br />
+	<br />
 	<?php
-	$filteredData=substr($_POST['img_val'], strpos($_POST['img_val'], ",")+1);
-	$unencodedData=base64_decode($filteredData);
-	?>
-	<img src="<?php echo $_POST['img_val']; ?>" alt="nom" />
+	define('UPLOAD_PATH', 'image_files/');
+
+	  // 接收 POST 進來的 base64 DtatURI String
+	  $img = $_POST['img_val'];
+
+	  // 轉檔 & 存檔
+	  $img = str_replace('data:image/png;base64,', '', $img);
+	  $img = str_replace(' ', '+', $img);
+	  $data = base64_decode($img);
+	  $file = UPLOAD_PATH . uniqid() . '.png';
+	  $success = file_put_contents($file, $data); 
+
+	  // output string
+	  //$output = ($success) ? '<img src="'. $file .'" alt="Canvas Image" />' : '<p>Unable to save the file.</p>';
 		
+	?>
+    <img src="graphics/share_btn.png" id="btnShare" style="padding-top: 1em;"/>
 	<br />
-	<div id="infos-upload">(Clic-droit "enregistrer sous" pour sauvegarder votre portrait)</div>
-	<br />
- <img src="graphics/login_btn.png" id="btnShare" onclick="postToWallUsingFBApi" style="padding-top: 3em;"/>
 	
+	<div id="infos-upload">(Clic-droit "enregistrer sous" pour sauvegarder votre portrait)</div>
+	
+	<img src="<?php echo $file; ?>" alt="nom" onclick="fbs_click(this)" />
+
 	
 </div>
 
@@ -79,9 +92,7 @@ switch ($_SESSION['profile']) {
   <script type="text/javascript" src="example.js"></script>
   <script src="csphotoselector.js"></script>
   
-</head>
-<body style="background:url(<?php echo $bg_src; ?>)">
-<div id="fb-root"></div>
+
 <script>
 window.fbAsyncInit = function() {
 	FB.init({ appId: '155864171290746', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
@@ -102,40 +113,11 @@ window.fbAsyncInit = function() {
 	ref.parentNode.insertBefore(js, ref);
 }(document));
 
-
-//   //post to wall function
-//function postToWallUsingFBApi()
-//{
-//    var data=
-//    {
-//        caption: 'This is my wall post example',
-//        message: 'Posted using FB.api',
-//        link: 'http://arte.tv/coen',
-//     }
-//    FB.api('/me/feed', 'post', data, onPostToWallCompleted);
-//}
-//
-//    //the return function after posting to wall
-//function onPostToWallCompleted(response)
-//{
-//    if (response)
-//    {
-//        if (response.error)
-//        {
-//            document.getElementById("txtEcho").innerHTML=response.error.message;
-//        }
-//        else
-//        {
-//            if (response.id)
-//                document.getElementById("txtEcho").innerHTML="Posted as post_id "+response.id;
-//            else if (response.post_id)
-//                document.getElementById("txtEcho").innerHTML="Posted as post_id "+response.post_id;
-//            else
-//                document.getElementById("txtEcho").innerHTML="Unknown Error";
-//        }
-//    }
-//}
-//
+function fbs_click(TheImg) {
+ u=TheImg.src;
+ // t=document.title;
+ t=TheImg.getAttribute('alt');
+ window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
 
 </script>
 
