@@ -1,8 +1,6 @@
-
 <?php
-
 session_start();
-//now, let's register our session variables
+
 switch ($_SESSION['profile']) {
  case 1:
     	 $bg_src="graphics/bg-barnes.jpg";
@@ -15,6 +13,9 @@ switch ($_SESSION['profile']) {
  case 3:
 		$bg_src="graphics/bg-davis.jpg";
  		$profile_src="graphics/title-davis.png";
+		$title_fbshare='Llewyn Davis de "Inside Llewyn Davis"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Davis, blabla';
+		
      break;
 	case 4:
 		$bg_src="graphics/bg-fink.jpg";
@@ -37,6 +38,23 @@ switch ($_SESSION['profile']) {
 		$profile_src="graphics/title-gunderson.png";
 		 break;
 	 }
+	 
+
+ 	define('UPLOAD_PATH', 'image_files/');
+
+ 	  // 接收 POST 進來的 base64 DtatURI String
+ 	  $img = $_POST['img_val'];
+
+ 	  // 轉檔 & 存檔
+ 	  $img = str_replace('data:image/png;base64,', '', $img);
+ 	  $img = str_replace(' ', '+', $img);
+ 	  $data = base64_decode($img);
+ 	  $file = UPLOAD_PATH . uniqid() . '.png';
+ 	  $success = file_put_contents($file, $data); 
+
+ 	  // output string
+ 	  //$output = ($success) ? '<img src="'. $file .'" alt="Canvas Image" />' : '<p>Unable to save the file.</p>';
+
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +62,12 @@ switch ($_SESSION['profile']) {
 <head>
   <title></title>
  <meta charset="utf-8">
-  <link href="css/general.css" rel="stylesheet">
+ <meta property="og:url" content="https://artecoen-preprod03.brainsonic.com/v2/save-share.php" >
+
+ <meta property="og:title" content="Le loser-o-tron des Frères Coen, par ARTE" >
+ 
+ 
+  <link href="css/general.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/csphotoselector.css" />
 </head>
 <body style="background:url(<?php echo $bg_src; ?>)">
@@ -59,29 +82,13 @@ switch ($_SESSION['profile']) {
 		
 		</div>
 	<br />
-	<?php
-	define('UPLOAD_PATH', 'image_files/');
-
-	  // 接收 POST 進來的 base64 DtatURI String
-	  $img = $_POST['img_val'];
-
-	  // 轉檔 & 存檔
-	  $img = str_replace('data:image/png;base64,', '', $img);
-	  $img = str_replace(' ', '+', $img);
-	  $data = base64_decode($img);
-	  $file = UPLOAD_PATH . uniqid() . '.png';
-	  $success = file_put_contents($file, $data); 
-
-	  // output string
-	  //$output = ($success) ? '<img src="'. $file .'" alt="Canvas Image" />' : '<p>Unable to save the file.</p>';
-		
-	?>
-    <img src="graphics/share_btn.png" id="btnShare" style="padding-top: 1em;"/>
+	
+    <img src="graphics/share_btn.png" id="share_button" style="padding-top: 1em;"/>
 	<br />
 	
 	<div id="infos-upload">(Clic-droit "enregistrer sous" pour sauvegarder votre portrait)</div>
 	
-	<img src="<?php echo $file; ?>" alt="nom" onclick="fbs_click(this)" />
+	<img src="<?php echo $file; ?>" alt="nom"  />
 
 	
 </div>
@@ -89,38 +96,44 @@ switch ($_SESSION['profile']) {
 
   <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="example.js"></script>
-  <script src="csphotoselector.js"></script>
   
 
 <script>
-window.fbAsyncInit = function() {
-	FB.init({ appId: '155864171290746', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
-	
-	FB.getLoginStatus(function(response) {
-		if (response.authResponse) {
-			$("#login-status").html("Logged in");
-		} else {
-			$("#login-status").html("Not logged in");
-		}
-	});
-};
-(function(d){
-	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement('script'); js.id = id; js.async = true;
-	js.src = "//connect.facebook.net/en_US/all.js";
-	ref.parentNode.insertBefore(js, ref);
-}(document));
 
-function fbs_click(TheImg) {
- u=TheImg.src;
- // t=document.title;
- t=TheImg.getAttribute('alt');
- window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}
+window.fbAsyncInit = function() {
+FB.init({
+	appId: '302290699911602',
+		channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html',
+		cookie: true,
+		status: true,
+		xfbml: true,
+		oauth: true
+});
+};
+ 
+(function() {
+var e = document.createElement('script');
+e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+e.async = true;
+document.getElementById('fb-root').appendChild(e);
+}());
+
+$(document).ready(function(){
+$('#share_button').live('click', function(e){
+e.preventDefault();
+FB.ui(
+{
+method: 'me/photos',
+name: 'Je suis <?php echo $title_fbshare; ?> – ARTE',
+link: 'http://arte.tv/coen',
+picture: 'https://artecoen-preprod03.brainsonic.com/image_files/526b90f69fc57.png',
+caption: '<?php echo $caption_fbshare; ?>',
+description: 'Loser-o-tron'
+});
+});
+});
 
 </script>
-
 
 </body>
 </html>

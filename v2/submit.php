@@ -194,22 +194,22 @@ switch ($_SESSION['profile']) {
 		<a href="#" id="CSPhotoSelector_buttonClose">x</a>
 		<div class="CSPhotoSelector_form">
 			<div class="CSPhotoSelector_header">
-				<p>Choose from Photos</p>
+				<p>Sélectionnez depuis vos photos</p>
 			</div>
 
 			<div class="CSPhotoSelector_content CSAlbumSelector_wrapper">
-				<p>Browse your albums until you find a picture you want to use</p>
+				<p>Parcourez vos albums pour choisir votre photo</p>
 				<div class="CSPhotoSelector_searchContainer CSPhotoSelector_clearfix">
-					<div class="CSPhotoSelector_selectedCountContainer">Select an album</div>
+					<div class="CSPhotoSelector_selectedCountContainer">Choisir un album</div>
 				</div>
 				<div class="CSPhotoSelector_photosContainer CSAlbum_container"></div>
 			</div>
 
 			<div class="CSPhotoSelector_content CSPhotoSelector_wrapper">
-				<p>Select a new photo</p>
+				<p>Choisir une nouvelle photo</p>
 				<div class="CSPhotoSelector_searchContainer CSPhotoSelector_clearfix">
-					<div class="CSPhotoSelector_selectedCountContainer"><span class="CSPhotoSelector_selectedPhotoCount">0</span> / <span class="CSPhotoSelector_selectedPhotoCountMax">0</span> photos selected</div>
-					<a href="#" id="CSPhotoSelector_backToAlbums">Back to albums</a>
+					<div class="CSPhotoSelector_selectedCountContainer"><span class="CSPhotoSelector_selectedPhotoCount">0</span> / <span class="CSPhotoSelector_selectedPhotoCountMax">0</span> photos sélectionnées</div>
+					<a href="#" id="CSPhotoSelector_backToAlbums">Retour aux albums</a>
 				</div>
 				<div class="CSPhotoSelector_photosContainer CSPhoto_container"></div>
 			</div>
@@ -218,13 +218,13 @@ switch ($_SESSION['profile']) {
 
 
 			<div class="CSPhotoSelector_footer CSPhotoSelector_clearfix">
-				<a href="#" id="CSPhotoSelector_pagePrev" class="CSPhotoSelector_disabled">Previous</a>
-				<a href="#" id="CSPhotoSelector_pageNext">Next</a>
+				<a href="#" id="CSPhotoSelector_pagePrev" class="CSPhotoSelector_disabled">Précédent</a>
+				<a href="#" id="CSPhotoSelector_pageNext">Prochain</a>
 				<div class="CSPhotoSelector_pageNumberContainer">
 					Page <span id="CSPhotoSelector_pageNumber">1</span> / <span id="CSPhotoSelector_pageNumberTotal">1</span>
 				</div>
 				<a href="#" id="CSPhotoSelector_buttonOK">OK</a>
-				<a href="#" id="CSPhotoSelector_buttonCancel">Cancel</a>
+				<a href="#" id="CSPhotoSelector_buttonCancel">Annuler</a>
 			</div>
 		</div>
 	</div>
@@ -240,7 +240,7 @@ switch ($_SESSION['profile']) {
 <div id="fb-root"></div>
 <script>
 window.fbAsyncInit = function() {
-	FB.init({ appId: '155864171290746', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
+	FB.init({ appId: '302290699911602', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
 	
 	FB.getLoginStatus(function(response) {
 		if (response.authResponse) {
