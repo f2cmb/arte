@@ -162,12 +162,7 @@ switch ($profile) {
 		<div id="infos-upload">(Redimensionner les éléments à l'aide des poignées)</div>
 		
 	
-		<br /><br />
-		<input type="image" src="graphics/create_btn.png" value="Take Screenshot Of Div" onclick="capture();" />
-		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
-		    <input type="hidden" name="img_val" id="img_val" value="" />
-		</form>
-		<br />
+		<br /><br /><br />
 			<div id="target">
 			
 				<?php if(isset($_REQUEST['show_image']) and $_REQUEST['show_image']!=''){?>
@@ -192,7 +187,11 @@ switch ($profile) {
 				</div>
 			</div>
 		
-			<br /><br />
+			<br /><br /><br />
+		<input type="image" src="graphics/snap_btn.png" value="Take Screenshot Of Div" onclick="capture();" />
+		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
+		    <input type="hidden" name="img_val" id="img_val" value="" />
+		</form>
 	</div>
 </body>
 </html>

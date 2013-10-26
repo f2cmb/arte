@@ -9,12 +9,16 @@
   <script type="text/javascript" src="js/html2canvas.js"></script>
 <script type="text/javascript">
 
+
+
 function capture() {
 	$('.ui-resizable-handle, .ui-resizable-se, .ui-icon, .ui-icon-gripsmall-diagonal-se').css("display","none");
 	$('#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip,#segrip').css("display","none");
 	$('#element1, #element2').css("border","none");
 	
 		html2canvas($('#target'), {
+			proxy: "server.js",
+		    useCORS: true,
         onrendered: function (canvas) {
             //Set hidden field's value to image data (base-64 string)
             $('#img_val').val(canvas.toDataURL("image/png"));
@@ -46,37 +50,22 @@ $(window).on('load',function () {
   
 <style type="text/css">
 
-
 #element1{
 	position:absolute;
 	z-index:9999;
 	top:600px;
 	left:35%;
-	border: 1px dashed #fff;
+	border: 1px dashed #11ece9;
     overflow: hidden;
-	
-    
 }
 #element2{
 	position:absolute;
 	z-index:9999;
 	top:600px;
 	left:35%;
-	border: 1px dashed #fff;
+	border: 1px dashed #11ece9;
     overflow: hidden;
-	
- 
 }
-
-#element1 :hover{
-cursor: -moz-grab;cursor: -webkit-grab
-    
-}
-#element2 :hover{
-	cursor: -moz-grab;cursor: -webkit-grab
- 
-}
-
 #nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip {
     width: 10px;
     height: 10px;
@@ -87,7 +76,12 @@ cursor: -moz-grab;cursor: -webkit-grab
     right: -5px;
     bottom: -5px;
 }
-
+#element1 :hover{
+cursor: -moz-grab;cursor: -webkit-grab
+}
+#element2 :hover{
+cursor: -moz-grab;cursor: -webkit-grab
+}
 
 </style>
 <?php
@@ -162,18 +156,11 @@ switch ($profile) {
 		<div id="infos-upload">(Redimensionner les éléments à l'aide des poignées)</div>
 		
 	
-		<br /><br />
-		<input type="image" src="graphics/create_btn.png" value="Take Screenshot Of Div" onclick="capture();" />
-		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
-		    <input type="hidden" name="img_val" id="img_val" value="" />
-		</form>
-		<br />
+		<br /><br /><br />
 			<div id="target">
 			
-				<?php if(isset($_REQUEST['show_image']) and $_REQUEST['show_image']!=''){?>
-				<div id="uploaded-image"><img class="uploaded-image" src="image_files/<?php echo $_REQUEST['show_image'];?>" style="float: left; margin-right: 10px;">
+				<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="float: left; margin-right: 10px;">
 				</div>
-				<?php }?>
 				<div id="elements-container">
 					<div id="element1">
 						<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
@@ -192,7 +179,11 @@ switch ($profile) {
 				</div>
 			</div>
 		
-			<br /><br />
+			<br /><br /><br />
+		<input type="image" src="graphics/snap_btn.png" value="Take Screenshot Of Div" onclick="capture();" />
+		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
+		    <input type="hidden" name="img_val" id="img_val" value="" />
+		</form>
 	</div>
 </body>
 </html>

@@ -5,7 +5,7 @@
  <meta charset="utf-8">
   <link href="css/general.css" rel="stylesheet">
   <link rel="stylesheet" href="css/csphotoselector.css" />
-  <?php phpinfo(); ?>
+  
 
 
 
