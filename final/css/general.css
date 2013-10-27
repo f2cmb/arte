@@ -81,7 +81,9 @@ form{
 #uploaded-image{
 	text-align:center;
 	margin:auto;
-	width:65%;
+	width:75%;
 }
+
+
 img#share_button {cursor: pointer;}
 

@@ -16,7 +16,7 @@ function capture() {
 	$('#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip,#segrip').css("display","none");
 	$('#element1, #element2').css("border","none");
 	
-		html2canvas($('#target'), {
+		html2canvas($('#uploaded-image'), {
 			proxy: "server.js",
 		    useCORS: true,
         onrendered: function (canvas) {
@@ -34,7 +34,7 @@ $(window).on('load',function () {
     $( ".element1" ).resizable({maxWidth: 400});
 	$( ".element2" ).resizable({maxWidth: 400});
     $( ".uploaded-image" ).resizable({
-    aspectRatio: true,maxWidth: 515,minWidth: 300,
+    aspectRatio: true,maxWidth: 650,minWidth: 300,
     resize: function(event, ui) {
         $(this).css({
             'top': parseInt(ui.position.top, 10) + ((ui.originalSize.height - ui.size.height)) / 2,
@@ -43,12 +43,34 @@ $(window).on('load',function () {
     }
 });
 });
-
 </script>
   <link href="css/flick/jquery-ui-1.9.2.custom.css" rel="stylesheet">
   <link href="css/general.css" rel="stylesheet">
   
 <style type="text/css">
+
+
+#element1{
+	position:absolute;
+	z-index:9999;
+	top:600px;
+	left:35%;
+	border: 1px dashed #fff;
+    overflow: hidden;
+	
+    
+}
+#element2{
+	position:absolute;
+	z-index:9999;
+	top:600px;
+	left:35%;
+	border: 1px dashed #fff;
+    overflow: hidden;
+	
+ 
+}
+
 
 .element1{max-width:650px;
 	text-align:center;
@@ -57,22 +79,16 @@ $(window).on('load',function () {
 .element2{max-width:650px;
 	text-align:center;
 	margin:auto;}
-#element1{
-	position:absolute;
-	z-index:9999;
-	top:600px;
-	left:35%;
-	border: 1px dashed #11ece9;
-    overflow: hidden;
+
+#element1 :hover{
+cursor: -moz-grab;cursor: -webkit-grab
+    
 }
-#element2{
-	position:absolute;
-	z-index:9999;
-	top:600px;
-	left:35%;
-	border: 1px dashed #11ece9;
-    overflow: hidden;
+#element2 :hover{
+	cursor: -moz-grab;cursor: -webkit-grab
+ 
 }
+
 #nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip {
     width: 10px;
     height: 10px;
@@ -83,12 +99,14 @@ $(window).on('load',function () {
     right: -5px;
     bottom: -5px;
 }
-#element1 :hover{
-cursor: -moz-grab;cursor: -webkit-grab
+
+
+img.uploaded-image.ui-resizable{
+	text-align:center; 
+	margin:auto;
+	width:100%;
 }
-#element2 :hover{
-cursor: -moz-grab;cursor: -webkit-grab
-}
+
 
 </style>
 <?php
@@ -163,33 +181,35 @@ switch ($profile) {
 		<div id="infos-upload">(Redimensionner les éléments à l'aide des poignées)</div>
 		
 	
-		<br /><br />
+		<br />
 		<input type="image" src="graphics/create-btn.png" value="Take Screenshot Of Div" onclick="capture();" />
 		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
 		    <input type="hidden" name="img_val" id="img_val" value="" />
 		</form>
-		<br />
-			<div id="target">
-			
-				<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="float: left; margin-right: 10px;">
+		<br />	<br />
+		
+	
+		<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="text-align:center;margin:auto">
+			<div id="elements-container">
+				<div id="element1">
+					<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+					<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+					<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+					<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+					<img class="element1" src="<?php echo $src1; ?>" />
 				</div>
-				<div id="elements-container">
-					<div id="element1">
-						<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
-						<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
-						<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
-						<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
-						<img class="element1" src="<?php echo $src1; ?>" />
-					</div>
-					<div id="element2">
-						<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
-					    <div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
-						<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
-					    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
-						<img class="element2" src="<?php echo $src2; ?>" />
-					</div>
+				<div id="element2">
+					<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+				    <div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+					<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+				    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+					<img class="element2" src="<?php echo $src2; ?>" />
 				</div>
 			</div>
+		</div>
+		
+		
+		
 		
 			<br /><br />
 	

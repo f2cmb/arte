@@ -2,7 +2,6 @@
 <?php
 
 session_start();
-$_SESSION['profile']= 3; 
 //now, let's register our session variables
 
 // upload the file
