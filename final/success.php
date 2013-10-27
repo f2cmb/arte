@@ -3,7 +3,7 @@
 <head>
   <title></title>
  <meta charset="utf-8">
- <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
   <script type="text/javascript" src="js/html2canvas.js"></script>
@@ -67,6 +67,15 @@ $(window).on('load',function () {
 	
  
 }
+
+
+.element1{max-width:650px;
+	text-align:center;
+	margin:auto;
+}
+.element2{max-width:650px;
+	text-align:center;
+	margin:auto;}
 
 #element1 :hover{
 cursor: -moz-grab;cursor: -webkit-grab

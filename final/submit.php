@@ -9,13 +9,13 @@ $_SESSION['profile']= 3;
 if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upload_form")) {
 	
 	// file needs to be jpg,gif,bmp,x-png and 4 MB max
-	if (($_FILES["image_upload_box"]["type"] == "image/jpeg" || $_FILES["image_upload_box"]["type"] == "image/pjpeg" || $_FILES["image_upload_box"]["type"] == "image/gif" || $_FILES["image_upload_box"]["type"] == "image/png") && ($_FILES["image_upload_box"]["size"] < 8388608))
+	if (($_FILES["image_upload_box"]["type"] == "image/jpeg" || $_FILES["image_upload_box"]["type"] == "image/pjpeg" || $_FILES["image_upload_box"]["type"] == "image/gif" || $_FILES["image_upload_box"]["type"] == "image/png") && ($_FILES["image_upload_box"]["size"] < 2097152))
 	{
 		
   
 		// some settings
-		$max_upload_width = 3000;
-		$max_upload_height = 2000;
+		$max_upload_width = 650;
+		$max_upload_height = 900;
 		  
 		// if user chosed properly then scale down the image according to user preferances
 		if(isset($_REQUEST['max_width_box']) and $_REQUEST['max_width_box']!='' and $_REQUEST['max_width_box']<=$max_upload_width){
@@ -79,11 +79,11 @@ if ((isset($_POST["submitted_form"])) && ($_POST["submitted_form"] == "image_upl
 		imagedestroy($image_source);
 		
 		
-		header("Location: success.php?upload_message=image uploaded&upload_message_type=success&show_image=".$_FILES["image_upload_box"]["name"]);
+				header("Location: success.php?upload_message=image uploaded&upload_message_type=success&show_image=".$_FILES["image_upload_box"]["name"]);
 		exit;
 	}
 	else{
-		header("Location: erreur.html");
+		header("Location: erreur.php");
 		exit;
 	}
 }
@@ -138,6 +138,7 @@ switch ($_SESSION['profile']) {
   <link rel="stylesheet" href="css/csphotoselector.css" />
 </head>
 <body style="background:url(<?php echo $bg_src; ?>)">
+	<div id="fb-root"></div>
 
 <div id="wrapper">
 		<div id="top-first">
@@ -156,17 +157,18 @@ switch ($_SESSION['profile']) {
 	<div id="mode-container">
 		<div class="upload-mode-container">
 			<span style="width:250px">une image depuis mon ordinateur </span>
-			<div id="infos-upload">(Fichiers image seulement, 2Mo Max.,formats : jpeg, gif ou png)</div>
+			<div id="infos-upload">(Fichiers image seulement, 2Mo max., jpeg, gif ou png)</div>
 			<br />
 			<div id="classic-select">
 				<form action="submit.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 5em;">
 					<input name="image_upload_box" type="file" id="image_upload_box" size="20" />
-					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" style="padding-top: 15px;"/>     
+					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" style="padding-top: 15px;"/>     					<input type="hidden" name="MAX_FILE_SIZE" value="2097152" /> 
+
 					<input name="submitted_form" type="hidden" id="submitted_form" value="image_upload_form" />
 				</form>
 			</div>
 		</div>
-			
+	</div>		
 		<div class="upload-mode-container">
 			<span style="width:250px">Parmi mes albums photos Facebook </span>
 			<div id="infos-upload">(Je me logge, je choisis et j'envoie)</div>
@@ -187,7 +189,14 @@ switch ($_SESSION['profile']) {
 			
 		</div>
 	</div>
+<br />
+	<div id="credits"><br /><br />Direction artistique : Arnaud Desjardins<br />
+Tous droits de reproduction et de diffusion réservés © 2013 ARTE G.E.I.E.<br />
+ARTE G.E.I.E. 4, quai du chanoine Winterer CS 20035 F- 67080 Strasbourg Cedex</div>	
 </div>
+
+
+
 <!-- Markup for Carson Shold's Photo Selector -->
 <div id="CSPhotoSelector">
 	<div class="CSPhotoSelector_dialog">
@@ -228,16 +237,16 @@ switch ($_SESSION['profile']) {
 			</div>
 		</div>
 	</div>
+	
 </div>
-
+	
 
   <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="example.js"></script>
+  <script type="text/javascript" src="fbselect.js"></script>
 	<script src="csphotoselector.js"></script>
   
 
-<div id="fb-root"></div>
 <script>
 window.fbAsyncInit = function() {
 	FB.init({ appId: '302290699911602', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });

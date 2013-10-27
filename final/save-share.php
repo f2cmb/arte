@@ -3,57 +3,68 @@ session_start();
 
 switch ($_SESSION['profile']) {
  case 1:
-    	 $bg_src="graphics/bg-barnes.jpg";
- 		 $profile_src="graphics/title-barnes.png";
+    	$bg_src="graphics/bg-barnes.jpg";
+ 		$profile_src="graphics/title-barnes.png";
+ 		$title_fbshare='Norville Barnes de "Le Grand Saut"';
+ 		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Norville, un jeune diplômé naïf doublé d\'un inventeur de génie';
      break;
  case 2:
 		$bg_src="graphics/bg-chigurh.jpg";
  	   	$profile_src="graphics/title-chigurh.png";
+ 		$title_fbshare='Anton Chigurh de "No Country For Old Men"';
+ 		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Anton, un tueur psychopathe bien coiffé';
      break;
  case 3:
 		$bg_src="graphics/bg-davis.jpg";
  		$profile_src="graphics/title-davis.png";
 		$title_fbshare='Llewyn Davis de "Inside Llewyn Davis"';
-		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Davis, blabla';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Davis, un chanteur de folk loser';
 		
      break;
 	case 4:
 		$bg_src="graphics/bg-fink.jpg";
 		$profile_src="graphics/title-fink.png";
+		$title_fbshare='Barton Fink de "Barton Fink"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Barton, un scénariste à la dérive à Hollywood';
 	    break;
 	case 5:
 		$bg_src="graphics/bg-gopnik.jpg";
 		$profile_src="graphics/title-gopnik.png";
+		$title_fbshare='Lawrence Larry Gopnik de "A Serious Man"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Lawrence Larry, un prof de physique en pleine crise existentielle';
 	    break;
 	case 6:
 		$bg_src="graphics/bg-mcgill.jpg";
 		$profile_src="graphics/title-mcgill.png";
+		$title_fbshare='Jeffrey "The Dude" Lebowski de "The Big Lebowski"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Ulysses Everett, un chômeur fan de bowling et de white russian
+';
 	    break;
 	case 7:
 		$bg_src="graphics/bg-lebowski.jpg";
 		$profile_src="graphics/title-lebowski.png";
+		$title_fbshare='Ulysses Everett Mc Gill de "Barton Fink"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Ulysses Everett, un prisonnier évadé obsédé par ses cheveux';
 	    break;
 	case 8:
 		$bg_src="graphics/bg-gunderson.jpg";
 		$profile_src="graphics/title-gunderson.png";
+		$title_fbshare='Marge Maggy Gunderson de "Fargo"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Marge Maggy, une chef de la police gaillarde et enceinte jusqu\'aux yeux';
 		 break;
 	 }
 	 
 
  	define('UPLOAD_PATH', 'image_files/');
 
- 	  // 接收 POST 進來的 base64 DtatURI String
  	  $img = $_POST['img_val'];
 
- 	  // 轉檔 & 存檔
  	  $img = str_replace('data:image/png;base64,', '', $img);
  	  $img = str_replace(' ', '+', $img);
  	  $data = base64_decode($img);
  	  $file = UPLOAD_PATH . uniqid() . '.png';
  	  $success = file_put_contents($file, $data); 
 
- 	  // output string
- 	  //$output = ($success) ? '<img src="'. $file .'" alt="Canvas Image" />' : '<p>Unable to save the file.</p>';
 
 ?>
 
@@ -82,6 +93,9 @@ switch ($_SESSION['profile']) {
 			
 		
 		</div>
+		<br />
+		<span>3. Je partage mon portrait de loser ! </span>
+		
 	<br />
 	
     <img src="graphics/share_btn.png" id="share_button" style="padding-top: 1em;"/>
@@ -95,7 +109,7 @@ switch ($_SESSION['profile']) {
 </div>
 
 
-  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   
 
