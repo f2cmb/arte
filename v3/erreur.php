@@ -75,7 +75,7 @@ switch ($_SESSION['profile']) {
 
  <script type="text/javascript">
  setTimeout(function(){
-   window.location = "https://artecoen-preprod03.brainsonic.com/<?php echo $url; ?>";
+   window.location = "https://artecoen.storage14.brainsonic.com/<?php echo $url; ?>";
  }, 5000);
  </script>
 

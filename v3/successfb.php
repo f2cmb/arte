@@ -34,8 +34,8 @@ function capture() {
 $(window).on('load',function () {
     $( "#element1" ).draggable();
     $( "#element2" ).draggable();
-    $( ".element1" ).resizable({maxWidth: 400});
-	$( ".element2" ).resizable({maxWidth: 400});
+    $( ".element1" ).resizable({maxWidth: 550});
+	$( ".element2" ).resizable({maxWidth: 550});
     $( ".uploaded-image" ).resizable({
     aspectRatio: true,maxWidth: 650,minWidth: 300,
     resize: function(event, ui) {
@@ -125,7 +125,7 @@ img.uploaded-image.ui-resizable{
 	text-align:center;
 	margin:auto;    
 	position:relative;
-	top:50%;
+  	top:30%;
 	font-family: 'Raleway', Arial, serif; font-weight: 300;
 	color:#fff;
 } 
@@ -207,10 +207,12 @@ switch ($profile) {
 			<img src="<?php echo $profile_src; ?>" alt="nom" />
 		</div>
 		<br />
-		<span>2. Je redimensionne ma photo, mes cheveux, ma moustache... </span>
-		<div id="infos-upload">(Redimensionner les éléments à l'aide de la poignée en bas à droite )</div>
+		<span>2. Je redimensionne ma photo, mes cheveux, ma moustache... </span><br />
+		<span style="text-transform:none; font-weight: 500;font-size:14px">Pour agrandir ou diminuer la taille des éléments,<br />utilisez la poignée en bas à droite de chaque cadre.</span>
 		
-	
+		
+		
+	<br />
 		<br />
 		<input type="image" src="graphics/create-btn.png" value="Take Screenshot Of Div" onclick="capture();" />
 		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
@@ -248,7 +250,7 @@ switch ($profile) {
 	</div>
 	<script>
 	window.fbAsyncInit = function() {
-		FB.init({ appId: '302290699911602', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
+		FB.init({ appId: '302290699911602', channelUrl : '//artecoen.storage14.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
 		FB.Canvas.setAutoGrow();
 		FB.getLoginStatus(function(response) {
 			if (response.authResponse) {

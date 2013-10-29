@@ -36,15 +36,14 @@ switch ($_SESSION['profile']) {
 	case 6:
 		$bg_src="graphics/bg-mcgill.jpg";
 		$profile_src="graphics/title-mcgill.png";
-		$title_fbshare='Jeffrey "The Dude" Lebowski de "The Big Lebowski"';
-		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Ulysses Everett, un chômeur fan de bowling et de white russian
-';
+		$title_fbshare='Ulysses Everett Mc Gill de "O Brothers"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Ulysses Everett, un prisonnier évadé obsédé par ses cheveux';
 	    break;
 	case 7:
 		$bg_src="graphics/bg-lebowski.jpg";
 		$profile_src="graphics/title-lebowski.png";
-		$title_fbshare='Ulysses Everett Mc Gill de "Barton Fink"';
-		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Ulysses Everett, un prisonnier évadé obsédé par ses cheveux';
+		$title_fbshare='The Dude" Lebowski de "The Big Lebowski"';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Jeffrey "The Dude" Lebowski, un chômeur fan de bowling et de white russian';
 	    break;
 	case 8:
 		$bg_src="graphics/bg-gunderson.jpg";
@@ -73,17 +72,42 @@ switch ($_SESSION['profile']) {
 <head>
   <title></title>
  <meta charset="utf-8">
- <meta property="og:url" content="https://artecoen-preprod03.brainsonic.com/save-share.php" >
+ <meta property="og:url" content="https://artecoen.storage14.brainsonic.com/save-share.php" >
 
  <meta property="og:title" content="Le loser-o-tron des Frères Coen, par ARTE" >
  
  
   <link href="css/general.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/csphotoselector.css" />
+  
+  <style>
+  #overlay{
+  	width:100%;
+  	height:100%;
+  	position:absolute;
+  	z-index:9999;   
+  	text-align:center;
+  	margin:auto;  
+  	display:none;  
+  	background-color:#000; 
+  	opacity:0.8;
+  }
+  #text-success{
+  	text-align:center;
+  	margin:auto;    
+  	position:relative;
+  	top:30%;
+  	font-family: 'Raleway', Arial, serif; font-weight: 300;
+  	color:#fff;
+  } 
+  </style>
 </head>
 <body style="background:url(<?php echo $bg_src; ?>)">
+	<div id="overlay"><div id="text-success">
+		Votre portait a bien été posté !<br />
+		Retrouvez dans quelques secondes sur votre mur Facebook !</div></div>
 <div id="fb-root"></div>
-<meta property="og:image" content="https://artecoen-preprod03.brainsonic.com/<?php echo $file; ?>" />
+<meta property="og:image" content="https://artecoen.storage14.brainsonic.com/<?php echo $file; ?>" />
 
 <div id="wrapper">
 		<div id="top-first">
@@ -101,7 +125,6 @@ switch ($_SESSION['profile']) {
     <img src="graphics/share_btn.png" id="share_button" style="padding-top: 1em;"/>
 	<br />
 	
-	<div id="infos-upload">(Clic-droit "enregistrer sous" pour sauvegarder votre portrait)</div>
 	
 	<img src="<?php echo $file; ?>" alt="nom"  />
 
@@ -116,7 +139,7 @@ switch ($_SESSION['profile']) {
 window.fbAsyncInit = function() {
 FB.init({
         appId: '302290699911602',
-                channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html',
+                channelUrl : '//artecoen.storage14.brainsonic.com/channel.html',
                 cookie: true,
                 status: true,
                 xfbml: true,
@@ -137,17 +160,38 @@ document.getElementById('fb-root').appendChild(e);
 $(document).ready(function(){
 $('#share_button').click(function(e){
 e.preventDefault();
-FB.ui(
-{
-	method: 'feed',
-	name: 'Je suis <?php echo $title_fbshare; ?> – ARTE',
-	link: 'http://arte.tv/coen',
-	picture: 'https://artecoen-preprod03.brainsonic.com/<?php echo $file; ?>',
-	caption: '<?php echo $caption_fbshare; ?>',
-	description: 'Loser-o-tron'
+$('#overlay').css("display","block"); 
+
+// Facebook login
+FB.login(function(response) {
+    if (response.authResponse) {
+        // login success, then post a photo
+        FB.api('/me/photos',
+               'post',
+               {
+                   message: '<?php echo $caption_fbshare; ?>, découvre quel loser tu es sur http://coen.arte.tv/fr/',
+                   url: 'https://artecoen.storage14.brainsonic.com/<?php echo $file; ?>'
+               },
+               function(response) {
+                 console.log(response);
+                 if (!response || response.error) {
+                     alert('erreur');
+                 } else {
+				 	
+                     
+                 }
+               }
+        );
+    }
+}, {scope: 'publish_stream'});
+
 });
 });
-});
+
+
+
+
+
 </script>
 <div id="credits"><br /><br />Direction artistique : Arnaud Desjardins<br />
 Tous droits de reproduction et de diffusion réservés © 2013 ARTE G.E.I.E.<br />

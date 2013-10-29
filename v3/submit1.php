@@ -176,7 +176,7 @@ switch ($_SESSION['profile']) {
 			
 				<br />
 			<div id="fb-select">
-   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 3em;"/>
+   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 3.5em;"/>
 				
 				<a href="#" class="photoSelect">
 				<img src="graphics/fb-upload.png" style="padding-top: 10px; border:0" />
@@ -248,7 +248,7 @@ switch ($_SESSION['profile']) {
 
 <script>
 window.fbAsyncInit = function() {
-	FB.init({ appId: '302290699911602', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
+	FB.init({ appId: '302290699911602', channelUrl : '//artecoen.storage14.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
 	FB.Canvas.setAutoGrow();
 	FB.getLoginStatus(function(response) {
 		if (response.authResponse) {

@@ -30,7 +30,7 @@ ARTE G.E.I.E. 4, quai du chanoine Winterer CS 20035 F- 67080 Strasbourg Cedex</d
 window.fbAsyncInit = function() {
 
  
-	FB.init({ appId: '302290699911602', channelUrl : '//artecoen-preprod03.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
+	FB.init({ appId: '302290699911602', channelUrl : '//artecoen.storage14.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
 	FB.Canvas.setAutoGrow();
 	
 
