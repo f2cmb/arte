@@ -293,8 +293,9 @@ window.fbAsyncInit = function() {
 
 $(window).on('load',function () {
 	$("#btnLogin").click(function (e) {
-		$("#btnLogin").fadeOut("slow");
-		$("#choisir").css("padding-top","67px");
+		$("#btnLogin").fadeOut("slow", function() {
+			$("#choisir").animate({ 'paddingTop': '+=67px'}, 'slow');
+  });
 	});
 	
 });

@@ -136,8 +136,14 @@ switch ($_SESSION['profile']) {
  <meta charset="utf-8">
   <link href="css/general.css" rel="stylesheet">
   <link rel="stylesheet" href="css/csphotoselector.css" />
+  <style>
+  #choisir{display:none;}
+ #envoyer{display:none;}
+	  
+  </style>
 </head>
 <body style="background:url(<?php echo $bg_src; ?>)">
+	
 	<div id="fb-root"></div>
 
 <div id="wrapper">
@@ -175,13 +181,13 @@ switch ($_SESSION['profile']) {
 			
 				<br />
 			<div id="fb-select">
-   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 3.5em;"/>
+   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 6.5em;"/>
 				
 				<a href="#" class="photoSelect">
-				<img src="graphics/fb-upload.png" style="padding-top: 10px; border:0" />
+				<img src="graphics/fb-upload.png" id="choisir" style="padding-top: 67px; border:0" />
 				</a>
 				<form action="successfb.php" method="POST" enctype="multipart/form-data" name="form_fb" id="form_fb"  style="padding-top: 10px;">
-					<input type="image" src="graphics/send_btn.png" name="submit" value="Envoi" />     
+					<input type="image" id="envoyer" src="graphics/send_btn.png" name="submit" value="Envoi" />     
 					<input name="image_fb" type="hidden" id="image_fb" value="" />
 				</form>
 			</div>
@@ -249,13 +255,41 @@ switch ($_SESSION['profile']) {
 window.fbAsyncInit = function() {
 	FB.init({ appId: '302290699911602', channelUrl : '//artecoen.storage14.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
 	FB.Canvas.setAutoGrow();
+	
 	FB.getLoginStatus(function(response) {
-		if (response.authResponse) {
-			$("#login-status").html("Logged in");
-		} else {
-			$("#login-status").html("Not logged in");
-		}
-	});
+	  if (response.status === 'connected') {
+	    // the user is logged in and has authenticated your
+	    // app, and response.authResponse supplies
+	    // the user's ID, a valid access token, a signed
+	    // request, and the time the access token 
+	    // and signed request each expire
+		$("#btnLogin").css("display","none");
+		$("#choisir").css("display","inline");
+		$("#envoyer").css("display","inline");
+		
+		
+	    var uid = response.authResponse.userID;
+	    var accessToken = response.authResponse.accessToken;
+	  } else if (response.status === 'not_authorized') {
+	    // the user is logged in to Facebook, 
+	    // but has not authenticated your app
+		$("#btnLogin").css("display","inline");
+		
+	  } else {
+	    // the user isn't logged in to Facebook.
+		$("#btnLogin").css("display","inline");
+		
+	  }
+	 });
+	
+	
+	//FB.getLoginStatus(function(response) {
+	//	if (response.authResponse) {
+	//		$("#login-status").html("Logged in");
+	//	} else {
+	//		$("#login-status").html("Not logged in");
+	//	}
+	//});
 };
 (function(d){
 	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -264,8 +298,18 @@ window.fbAsyncInit = function() {
 	js.src = "//connect.facebook.net/en_US/all.js";
 	ref.parentNode.insertBefore(js, ref);
 }(document));
-</script>
 
+$(window).on('load',function () {
+	$("#btnLogin").click(function (e) {
+		$("#btnLogin").fadeOut("slow", function() {
+			$("#choisir").fadeIn();
+			$("#envoyer").fadeIn();
+			
+  });
+	});
+	
+});
+</script>
 
 </body>
 </html>

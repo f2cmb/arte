@@ -250,13 +250,39 @@ switch ($_SESSION['profile']) {
 window.fbAsyncInit = function() {
 	FB.init({ appId: '302290699911602', channelUrl : '//artecoen.storage14.brainsonic.com/channel.html', cookie: true, status: true, xfbml: true, oauth: true });
 	FB.Canvas.setAutoGrow();
+	
 	FB.getLoginStatus(function(response) {
-		if (response.authResponse) {
-			$("#login-status").html("Logged in");
-		} else {
-			$("#login-status").html("Not logged in");
-		}
-	});
+	  if (response.status === 'connected') {
+	    // the user is logged in and has authenticated your
+	    // app, and response.authResponse supplies
+	    // the user's ID, a valid access token, a signed
+	    // request, and the time the access token 
+	    // and signed request each expire
+		$("#btnLogin").css("display","none");
+		$("#choisir").css("padding-top","67px");
+		
+	    var uid = response.authResponse.userID;
+	    var accessToken = response.authResponse.accessToken;
+	  } else if (response.status === 'not_authorized') {
+	    // the user is logged in to Facebook, 
+	    // but has not authenticated your app
+		$("#btnLogin").css("display","inline");
+		
+	  } else {
+	    // the user isn't logged in to Facebook.
+		$("#btnLogin").css("display","inline");
+		
+	  }
+	 });
+	
+	
+	//FB.getLoginStatus(function(response) {
+	//	if (response.authResponse) {
+	//		$("#login-status").html("Logged in");
+	//	} else {
+	//		$("#login-status").html("Not logged in");
+	//	}
+	//});
 };
 (function(d){
 	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -265,8 +291,16 @@ window.fbAsyncInit = function() {
 	js.src = "//connect.facebook.net/en_US/all.js";
 	ref.parentNode.insertBefore(js, ref);
 }(document));
-</script>
 
+$(window).on('load',function () {
+	$("#btnLogin").click(function (e) {
+		$("#btnLogin").fadeOut("slow", function() {
+			$("#choisir").animate({ 'paddingTop': '+=67px'}, 'slow');
+  });
+	});
+	
+});
+</script>
 
 </body>
 </html>
