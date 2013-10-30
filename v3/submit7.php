@@ -166,7 +166,7 @@ switch ($_SESSION['profile']) {
 			<div id="infos-upload">(Fichiers image seulement, 2Mo max., jpeg, gif ou png)</div>
 			<br />
 			<div id="classic-select">
-				<form action="submit4.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 5em;">
+				<form action="submit7.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 5em;">
 					<input name="image_upload_box" type="file" id="image_upload_box" size="20" />
 					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" style="padding-top: 15px;"/>     					<input type="hidden" name="MAX_FILE_SIZE" value="2097152" /> 
 

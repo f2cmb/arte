@@ -1,3 +1,6 @@
+<?php
+session_start();	
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,15 +35,7 @@ $(window).on('load',function () {
     $( "#element2" ).draggable();
     $( ".element1" ).resizable({maxWidth: 550});
 	$( ".element2" ).resizable({maxWidth: 550});
-    $( ".uploaded-image" ).resizable({
-    aspectRatio: true,maxWidth: 650,minWidth: 300,
-    resize: function(event, ui) {
-        $(this).css({
-            'top': parseInt(ui.position.top, 10) + ((ui.originalSize.height - ui.size.height)) / 2,
-            'left': parseInt(ui.position.left, 10) + ((ui.originalSize.width - ui.size.width)) / 2
-        });
-    }
-});
+
 });
 
 </script>
@@ -136,9 +131,6 @@ img#watermark{
 }
 </style>
 <?php
-
-session_start();
-
 $profile = $_SESSION['profile'];
 
 switch ($profile) {

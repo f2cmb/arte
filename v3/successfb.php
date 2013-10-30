@@ -36,15 +36,8 @@ $(window).on('load',function () {
     $( "#element2" ).draggable();
     $( ".element1" ).resizable({maxWidth: 550});
 	$( ".element2" ).resizable({maxWidth: 550});
-    $( ".uploaded-image" ).resizable({
-    aspectRatio: true,maxWidth: 650,minWidth: 300,
-    resize: function(event, ui) {
-        $(this).css({
-            'top': parseInt(ui.position.top, 10) + ((ui.originalSize.height - ui.size.height)) / 2,
-            'left': parseInt(ui.position.left, 10) + ((ui.originalSize.width - ui.size.width)) / 2
-        });
-    }
-});
+    
+
 });
 </script>
   <link href="css/flick/jquery-ui-1.9.2.custom.css" rel="stylesheet">
