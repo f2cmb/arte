@@ -136,8 +136,14 @@ switch ($_SESSION['profile']) {
  <meta charset="utf-8">
   <link href="css/general.css" rel="stylesheet">
   <link rel="stylesheet" href="css/csphotoselector.css" />
+  <style>
+  #choisir{display:none;}
+ #envoyer{display:none;}
+	  
+  </style>
 </head>
 <body style="background:url(<?php echo $bg_src; ?>)">
+	
 	<div id="fb-root"></div>
 
 <div id="wrapper">
@@ -160,7 +166,7 @@ switch ($_SESSION['profile']) {
 			<div id="infos-upload">(Fichiers image seulement, 2Mo max., jpeg, gif ou png)</div>
 			<br />
 			<div id="classic-select">
-				<form action="submit6.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 5em;">
+				<form action="submit4.php" method="POST" enctype="multipart/form-data" name="image_upload_form" id="image_upload_form" style="padding-top: 5em;">
 					<input name="image_upload_box" type="file" id="image_upload_box" size="20" />
 					<input type="image" name="submit" src="graphics/classic-upload.png" value="Upload image" style="padding-top: 15px;"/>     					<input type="hidden" name="MAX_FILE_SIZE" value="2097152" /> 
 
@@ -171,17 +177,17 @@ switch ($_SESSION['profile']) {
 	</div>		
 		<div class="upload-mode-container">
 			<span style="width:250px">Parmi mes albums photos Facebook </span>
-			<div id="infos-upload">(Je me logge, je choisis et j'envoie)</div>
+			<div id="infos-upload">(J'autorise l'application, je choisis et j'envoie)</div>
 			
 				<br />
 			<div id="fb-select">
-   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 3.5em;"/>
+   			 <img src="graphics/login_btn.png" id="btnLogin" style="padding-top: 6.5em;"/>
 				
 				<a href="#" class="photoSelect">
-				<img src="graphics/fb-upload.png" style="padding-top: 10px; border:0" />
+				<img src="graphics/fb-upload.png" id="choisir" style="padding-top: 67px; border:0" />
 				</a>
 				<form action="successfb.php" method="POST" enctype="multipart/form-data" name="form_fb" id="form_fb"  style="padding-top: 10px;">
-					<input type="image" src="graphics/send_btn.png" name="submit" value="Envoi" />     
+					<input type="image" id="envoyer" src="graphics/send_btn.png" name="submit" value="Envoi" />     
 					<input name="image_fb" type="hidden" id="image_fb" value="" />
 				</form>
 			</div>
@@ -252,36 +258,23 @@ window.fbAsyncInit = function() {
 	
 	FB.getLoginStatus(function(response) {
 	  if (response.status === 'connected') {
-	    // the user is logged in and has authenticated your
-	    // app, and response.authResponse supplies
-	    // the user's ID, a valid access token, a signed
-	    // request, and the time the access token 
-	    // and signed request each expire
+en 
 		$("#btnLogin").css("display","none");
-		$("#choisir").css("padding-top","67px");
+		$("#choisir").css("display","inline");
+		$("#envoyer").css("display","inline");
 		
 	    var uid = response.authResponse.userID;
 	    var accessToken = response.authResponse.accessToken;
 	  } else if (response.status === 'not_authorized') {
-	    // the user is logged in to Facebook, 
-	    // but has not authenticated your app
+	   
 		$("#btnLogin").css("display","inline");
 		
 	  } else {
-	    // the user isn't logged in to Facebook.
 		$("#btnLogin").css("display","inline");
 		
 	  }
 	 });
-	
-	
-	//FB.getLoginStatus(function(response) {
-	//	if (response.authResponse) {
-	//		$("#login-status").html("Logged in");
-	//	} else {
-	//		$("#login-status").html("Not logged in");
-	//	}
-	//});
+
 };
 (function(d){
 	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
@@ -294,7 +287,9 @@ window.fbAsyncInit = function() {
 $(window).on('load',function () {
 	$("#btnLogin").click(function (e) {
 		$("#btnLogin").fadeOut("slow", function() {
-			$("#choisir").animate({ 'paddingTop': '+=67px'}, 'slow');
+			$("#choisir").fadeIn();
+			$("#envoyer").fadeIn();
+			
   });
 	});
 	

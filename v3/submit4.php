@@ -177,7 +177,7 @@ switch ($_SESSION['profile']) {
 	</div>		
 		<div class="upload-mode-container">
 			<span style="width:250px">Parmi mes albums photos Facebook </span>
-			<div id="infos-upload">(Je me logge, je choisis et j'envoie)</div>
+			<div id="infos-upload">(J'autorise l'application, je choisis et j'envoie)</div>
 			
 				<br />
 			<div id="fb-select">
@@ -258,38 +258,23 @@ window.fbAsyncInit = function() {
 	
 	FB.getLoginStatus(function(response) {
 	  if (response.status === 'connected') {
-	    // the user is logged in and has authenticated your
-	    // app, and response.authResponse supplies
-	    // the user's ID, a valid access token, a signed
-	    // request, and the time the access token 
-	    // and signed request each expire
+en 
 		$("#btnLogin").css("display","none");
 		$("#choisir").css("display","inline");
 		$("#envoyer").css("display","inline");
 		
-		
 	    var uid = response.authResponse.userID;
 	    var accessToken = response.authResponse.accessToken;
 	  } else if (response.status === 'not_authorized') {
-	    // the user is logged in to Facebook, 
-	    // but has not authenticated your app
+	   
 		$("#btnLogin").css("display","inline");
 		
 	  } else {
-	    // the user isn't logged in to Facebook.
 		$("#btnLogin").css("display","inline");
 		
 	  }
 	 });
-	
-	
-	//FB.getLoginStatus(function(response) {
-	//	if (response.authResponse) {
-	//		$("#login-status").html("Logged in");
-	//	} else {
-	//		$("#login-status").html("Not logged in");
-	//	}
-	//});
+
 };
 (function(d){
 	var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];

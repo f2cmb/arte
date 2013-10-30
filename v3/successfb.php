@@ -16,7 +16,7 @@ function capture() {
 	$('#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip,#segrip').css("display","none");
 	$('#element1, #element2').css("border","none");
 	$('#overlay').css("display","block"); 
-	$('#watermark').css("display","block");
+	$('#watermark').css("display","inline");
 
 	
 		html2canvas($('#uploaded-image'), {
@@ -130,12 +130,14 @@ img.uploaded-image.ui-resizable{
 	color:#fff;
 } 
 
-#watermark{
+img#watermark{
 	position:relative;
-	z-index:9996; 
+	z-index:9996;
+	margin:0px 0px -38px 0px;
+	bottom: 60px;
+	left: 30%;
 	display:none;
-	bottom: 70px;
-	left: 60%;
+	
 }
 </style>
 <?php
@@ -222,7 +224,8 @@ switch ($profile) {
 		
 	
 		<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="text-align:center;margin:auto">
-			<div id="elements-container">
+			<img id="watermark" src="graphics/watermark.png" />
+			
 				<div id="element1">
 					<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
 					<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
@@ -237,9 +240,7 @@ switch ($profile) {
 				    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
 					<img class="element2" src="<?php echo $src2; ?>" />
 				</div>
-				<img id="watermark" src="graphics/watermark.png" />
 				
-			</div>
 		</div>
 		
 		

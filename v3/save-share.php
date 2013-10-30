@@ -6,32 +6,32 @@ switch ($_SESSION['profile']) {
     	$bg_src="graphics/bg-barnes.jpg";
  		$profile_src="graphics/title-barnes.png";
  		$title_fbshare='Norville Barnes de "Le Grand Saut"';
- 		$caption_fbshare="Grâce au Lose-o-maton des frères Coen je suis Norville, un jeune diplômé naïf doublé d\'un inventeur de génie";
+ 		$caption_fbshare="Grâce au Lose-o-maton des frères Coen je suis Norville Barnes, un jeune diplômé naïf doublé d\'un inventeur de génie";
      break;
  case 2:
 		$bg_src="graphics/bg-chigurh.jpg";
  	   	$profile_src="graphics/title-chigurh.png";
  		$title_fbshare='Anton Chigurh de "No Country For Old Men"';
- 		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Anton, un tueur psychopathe bien coiffé';
+ 		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Anton Chigurh, un tueur psychopathe bien coiffé';
      break;
  case 3:
 		$bg_src="graphics/bg-davis.jpg";
  		$profile_src="graphics/title-davis.png";
 		$title_fbshare='Llewyn Davis de "Inside Llewyn Davis"';
-		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Davis, un chanteur de folk loser';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Llewyn Davis, un chanteur de folk loser';
 		
      break;
 	case 4:
 		$bg_src="graphics/bg-fink.jpg";
 		$profile_src="graphics/title-fink.png";
 		$title_fbshare='Barton Fink de "Barton Fink"';
-		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Barton, un scénariste à la dérive à Hollywood';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Barton Fink, un scénariste à la dérive à Hollywood';
 	    break;
 	case 5:
 		$bg_src="graphics/bg-gopnik.jpg";
 		$profile_src="graphics/title-gopnik.png";
 		$title_fbshare='Lawrence Larry Gopnik de "A Serious Man"';
-		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Lawrence Larry, un prof de physique en pleine crise existentielle';
+		$caption_fbshare='Grâce au Lose-o-maton des frères Coen je suis Lawrence Larry Gopnik, un prof de physique en pleine crise existentielle';
 	    break;
 	case 6:
 		$bg_src="graphics/bg-mcgill.jpg";
@@ -49,7 +49,7 @@ switch ($_SESSION['profile']) {
 		$bg_src="graphics/bg-gunderson.jpg";
 		$profile_src="graphics/title-gunderson.png";
 		$title_fbshare='Marge Maggy Gunderson de "Fargo"';
-		$caption_fbshare="Grâce au Lose-o-maton des frères Coen je suis Marge Maggy, une chef de la police gaillarde et enceinte jusqu\'aux yeux";
+		$caption_fbshare="Grâce au Lose-o-maton des frères Coen je suis Marge Maggy Gunderson, une chef de la police gaillarde et enceinte jusqu\'aux yeux";
 		 break;
 	 }
 	 
@@ -169,7 +169,7 @@ FB.login(function(response) {
         FB.api('/me/photos',
                'post',
                {
-                   message: '<?php echo $caption_fbshare; ?>, découvre quel loser tu es sur http://coen.arte.tv/fr/',
+                   message: '<?php echo $caption_fbshare; ?>. Découvre quel loser tu es sur www.arte.tv/coen',
                    url: 'https://artecoen.storage14.brainsonic.com/<?php echo $file; ?>'
                },
                function(response) {

@@ -171,7 +171,7 @@ switch ($_SESSION['profile']) {
 	</div>		
 		<div class="upload-mode-container">
 			<span style="width:250px">Parmi mes albums photos Facebook </span>
-			<div id="infos-upload">(Je me logge, je choisis et j'envoie)</div>
+			<div id="infos-upload">(J'autorise l'application, je choisis et j'envoie)</div>
 			
 				<br />
 			<div id="fb-select">
