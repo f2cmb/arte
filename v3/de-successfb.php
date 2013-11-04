@@ -1,6 +1,3 @@
-<?php
-session_start();	
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,16 +8,20 @@ session_start();
   <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
   <script type="text/javascript" src="js/html2canvas.js"></script>
 <script type="text/javascript">
+
+
+
 function capture() {
 	$('.ui-resizable-handle, .ui-resizable-se, .ui-icon, .ui-icon-gripsmall-diagonal-se').css("display","none");
 	$('#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip,#segrip').css("display","none");
 	$('#element1, #element2').css("border","none");
-	$('#overlay').css("display","block");     
+	$('#overlay').css("display","block"); 
 	$('#watermark').css("display","inline");
 
 	
-	
 		html2canvas($('#uploaded-image'), {
+			proxy: "server.js",
+		    useCORS: true,
         onrendered: function (canvas) {
             //Set hidden field's value to image data (base-64 string)
             $('#img_val').val(canvas.toDataURL("image/png"));
@@ -35,9 +36,9 @@ $(window).on('load',function () {
     $( "#element2" ).draggable();
     $( ".element1" ).resizable({maxWidth: 550});
 	$( ".element2" ).resizable({maxWidth: 550});
+    
 
 });
-
 </script>
   <link href="css/flick/jquery-ui-1.9.2.custom.css" rel="stylesheet">
   <link href="css/general.css" rel="stylesheet">
@@ -101,6 +102,7 @@ img.uploaded-image.ui-resizable{
 	margin:auto;
 	width:100%;
 }
+
 #overlay{
 	width:100%;
 	height:100%;
@@ -119,7 +121,7 @@ img.uploaded-image.ui-resizable{
   	top:30%;
 	font-family: 'Raleway', Arial, serif; font-weight: 300;
 	color:#fff;
-}
+} 
 
 img#watermark{
 	position:relative;
@@ -128,11 +130,14 @@ img#watermark{
 	bottom: 60px;
 	left: 30%;
 	display:none;
+	
 }
 </style>
 <?php
-$profile = $_SESSION['profile'];
 
+session_start();
+
+$profile = $_SESSION['profile'];
 switch ($profile) {
     case 1:
         $bg_src="graphics/bg-barnes.jpg";
@@ -186,54 +191,56 @@ switch ($profile) {
 
 ?>
 </head>
-<body style="background:url(<?php echo $bg_src; ?>)">  
-
-	
+<body style="background:url(<?php echo $bg_src; ?>)"> 
 	<div id="overlay"><div id="loader"><img src="graphics/loading.gif"><br />
 		Patience, nous créons votre portrait...</div></div>
 	<div id="wrapper">
 		<div id="top-first">
-			<img src="graphics/logo-small.png" alt="coenizr" /><br />
-			Refaites-vous le portrait en
+			<img src="graphics/logo-small-de.png" alt="coenizr" /><br />
+			Lassen Sie sich darstellen als
 			<br />
 			<img src="<?php echo $profile_src; ?>" alt="nom" />
 		</div>
 		<br />
-		<span>2. Je redimensionne ma photo, mes cheveux, ma moustache... </span><br />
-		<span style="text-transform:none; font-weight: 500;font-size:14px">Pour agrandir ou diminuer la taille des éléments,<br />utilisez la poignée en bas à droite de chaque cadre.</span>
+		<span>2. Ich passe Größe, meine Haare, meinen Schnurrbart, etc. an </span><br />
+		<span style="text-transform:none; font-weight: 500;font-size:14px">Um Elemente zu vergrößern oder verkleinern<br />nutzen Sie den Regler rechts unten in jedem Feld.</span>
 		
 		
 		
 	<br />
 		<br />
-		<input type="image" src="graphics/create-btn.png" value="Take Screenshot Of Div" onclick="capture();" />
-		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
+		<input type="image" src="graphics/de-create-btn.png" value="Take Screenshot Of Div" onclick="capture();" />
+		<form method="POST" enctype="multipart/form-data" action="de-save-share.php" id="myForm">
 		    <input type="hidden" name="img_val" id="img_val" value="" />
 		</form>
 		<br />	<br />
+		
+	
+		<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="text-align:center;margin:auto;min-width:100%">
+			<img id="watermark" src="graphics/watermark.png" />
 			
-				<?php if(isset($_REQUEST['show_image']) and $_REQUEST['show_image']!=''){?>
-				<div id="uploaded-image"><img class="uploaded-image" src="image_files/<?php echo $_REQUEST['show_image'];?>" style="text-align:center;margin:auto;min-width:100%">
-					<img id="watermark" src="graphics/watermark.png" />
-						<div id="element1">
-							<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
-							<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
-							<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
-							<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
-							<img class="element1" src="<?php echo $src1; ?>" />
-						</div>
-						<div id="element2">
-							<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
-						    <div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
-							<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
-						    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
-							<img class="element2" src="<?php echo $src2; ?>" />
-						</div>
+				<div id="element1">
+					<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+					<div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+					<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+					<div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+					<img class="element1" src="<?php echo $src1; ?>" />
 				</div>
-				<?php }?>
+				<div id="element2">
+					<div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+				    <div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+					<div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+				    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+					<img class="element2" src="<?php echo $src2; ?>" />
+				</div>
 				
+		</div>
+		
+		
+		
 		
 			<br /><br />
+	
 	</div>
 	<script>
 	window.fbAsyncInit = function() {

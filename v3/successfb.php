@@ -216,7 +216,7 @@ switch ($profile) {
 		<br />	<br />
 		
 	
-		<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="text-align:center;margin:auto">
+		<div id="uploaded-image"><img class="uploaded-image" src="<?php echo $_POST['image_fb'];?>" style="text-align:center;margin:auto;min-width:100%">
 			<img id="watermark" src="graphics/watermark.png" />
 			
 				<div id="element1">

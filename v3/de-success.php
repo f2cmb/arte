@@ -193,21 +193,21 @@ switch ($profile) {
 		Patience, nous créons votre portrait...</div></div>
 	<div id="wrapper">
 		<div id="top-first">
-			<img src="graphics/logo-small.png" alt="coenizr" /><br />
-			Refaites-vous le portrait en
+			<img src="graphics/logo-small-de.png" alt="coenizr" /><br />
+			Lassen Sie sich darstellen als
 			<br />
 			<img src="<?php echo $profile_src; ?>" alt="nom" />
 		</div>
 		<br />
-		<span>2. Je redimensionne ma photo, mes cheveux, ma moustache... </span><br />
-		<span style="text-transform:none; font-weight: 500;font-size:14px">Pour agrandir ou diminuer la taille des éléments,<br />utilisez la poignée en bas à droite de chaque cadre.</span>
+		<span>2. Ich passe Größe, meine Haare, meinen Schnurrbart, etc. an </span><br />
+		<span style="text-transform:none; font-weight: 500;font-size:14px">Um Elemente zu vergrößern oder verkleinern<br />nutzen Sie den Regler rechts unten in jedem Feld.</span>
 		
 		
 		
 	<br />
 		<br />
-		<input type="image" src="graphics/create-btn.png" value="Take Screenshot Of Div" onclick="capture();" />
-		<form method="POST" enctype="multipart/form-data" action="save-share.php" id="myForm">
+		<input type="image" src="graphics/de-create-btn.png" value="Take Screenshot Of Div" onclick="capture();" />
+		<form method="POST" enctype="multipart/form-data" action="de-save-share.php" id="myForm">
 		    <input type="hidden" name="img_val" id="img_val" value="" />
 		</form>
 		<br />	<br />
